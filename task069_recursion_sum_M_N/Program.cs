@@ -2,16 +2,15 @@
 Console.Clear();
 Console.WriteLine("Найти сумму элементов от M до N, N и M заданы");
 
-int SumNamberFromMToN(int namberStart, int namberEnd, int sign)
+int SumNamberFromMToN(int namberStart, int namberEnd)
 {
-	if (namberStart * sign >= namberEnd * sign)
+	if (namberStart >= namberEnd)
 	{
-		Console.Write($"{namberStart}");
 		return namberStart;
 	}else
 	{
-		Console.Write($"{ + namberStart}, ");
-		return namberStart + SumNamberFromMToN(namberStart + sign, namberEnd, sign);
+		// Console.Write($"{ + namberStart}, ");
+		return namberStart + SumNamberFromMToN(namberStart + 1, namberEnd);
 	}
 }
 
@@ -20,7 +19,9 @@ int namberM = int.Parse(Console.ReadLine());
 Console.Write("Введите N: ");
 int namberN = int.Parse(Console.ReadLine());
 
-int sign = (namberN - namberM) / Math.Abs(namberN - namberM);
-int sum = SumNamberFromMToN(namberM, namberN, sign);
-Console.WriteLine();
+int sum = 0;
+if (namberM > namberN) sum = SumNamberFromMToN(namberN, namberM);
+else 
+	sum = SumNamberFromMToN(namberM, namberN);
+
 Console.WriteLine($"Сумма элементов от M до N равна {sum}");
